@@ -1,0 +1,55 @@
+---
+# roles/ansible-role-nexus/tasks/debug.yml
+
+# Include /tasks/debug-group-and-host-vars.yml
+
+
+- name: "Debug values for gathered from group and host variables"
+  include: "{{ fact_role_path }}/tasks/debug-group-and-host-vars.yml"
+
+  when: ansible-role-nexus_debug
+
+# Include /tasks/debug-playbook-vars.yml
+
+
+- name: "Debug - ansible playbook variable values"
+  include: "{{ fact_role_path }}/tasks/debug-playbook-vars.yml"
+
+  when: ansible-role-nexus_debug
+
+# Any custom vars you want printed last
+#
+# Some examples
+
+- name: "Debug - value of inventory_hostname"
+  debug: msg="{{ item }}"
+  with_items:
+    - inventory_hostname
+    - ansible_hostname
+  when: ansible-role-nexus_debug
+
+
+- name: "Debug - ansible playbook variable values"
+  debug: msg="{{ ansible_hostname }}"
+
+  when: ansible-role-nexus_debug
+
+
+- name: "Debug - ansible playbook variable values"
+  debug: msg="{{ fact_role_path }}"
+
+  when: ansible-role-nexus_debug
+
+## Distribution
+- name: "Debug - ansible_distribution"
+  debug: msg="{{ ansible_distribution }}"
+  when: ansible-role-nexus_debug
+- name: "Debug - ansible_distribution_release"
+  debug: msg="{{ ansible_distribution_release }}"
+  when: ansible-role-nexus_debug
+- name: "Debug - ansible_distribution_version"
+  debug: msg="{{ ansible_distribution_version }}"
+  when: ansible-role-nexus_debug
+- name: "Debug - ansible_distribution_major_version"
+  debug: msg="{{ ansible_distribution_major_version }}"
+  when: ansible-role-nexus_debug

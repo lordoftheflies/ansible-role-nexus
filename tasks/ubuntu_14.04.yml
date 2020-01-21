@@ -1,0 +1,7 @@
+---
+# roles/ansible-role-nexus/tasks/ubuntu_14.04.yml
+
+- debug:
+    msg:
+      - "Ubuntu 14.04 not supported at this time"
+      - "System {{ inventory_hostname }} not configured"

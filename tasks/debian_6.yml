@@ -1,0 +1,7 @@
+---
+# roles/ansible-role-nexus/tasks/debian_6.yml
+
+- debug:
+    msg:
+      - "Debian 6  (Squeeze) not supported at this time"
+      - "System {{ inventory_hostname }} not configured"

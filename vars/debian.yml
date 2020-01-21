@@ -1,0 +1,5 @@
+---
+# roles/ansible-role-nexus/vars/debian.yml
+
+# Debian specific vars
+ansible-role-nexus_package_extension: 'deb'

@@ -1,0 +1,17 @@
+
+- name: Create systemd service configuration
+  become: yes
+  template:
+    src: "nexus-nginx.conf"
+    dest: "/etc/nginx/sites-available"
+
+- name: "Symlink to enable site"
+  become: yes
+  file:
+    src: "/etc/nginx/sites-available/nexus-nginx.conf"
+    dest: "/etc/nginx/sites-enabled/nexus-nginx.conf"
+    state: link
+
+- name: "Restart nginx service"
+  become: yes
+  systemd: name=nginx daemon_reload=yes enabled=yes state=started

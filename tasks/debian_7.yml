@@ -1,0 +1,7 @@
+---
+# roles/ansible-role-nexus/tasks/debian_7.yml
+
+- debug:
+    msg:
+      - "Debian 7 (Wheezy) not supported at this time"
+      - "System {{ inventory_hostname }} not configured"
