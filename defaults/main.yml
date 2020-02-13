@@ -21,36 +21,36 @@ nexus_backup_log: '/var/log/nexus-backup.log'
 # run ansible-playbook example.yml -e "purge=true"
 
 # Nexus default properties
-nexus_default_port: 9901
-nexus_docker_hosted_port: 9902
-nexus_docker_proxy_port: 9903
-nexus_docker_group_port: 9904
+nexus_default_port: 6000
+nexus_docker_hosted_port: 6001
+nexus_docker_proxy_port: 6003
+nexus_docker_group_port: 6005
 nexus_default_context_path: '/'
 
-nexus_admin_password: 'fAhpdh8QvryKDqfM' # Note : admin password change subsequent to first-time install is *not implemented* yet
+nexus_admin_password: 'qwe123' # Note : admin password change subsequent to first-time install is *not implemented* yet
 nexus_install_admin_password: 'admin123' # Note : admin password change subsequent to first-time install is *not implemented* yet
 nexus_anonymous_access: false
 
-public_hostname: 'nexus.nobug.hu'
+public_hostname: 'nexus.cherubits.hu'
 
 nexus_branding_header: ""
 nexus_branding_footer: "Last provisionned {{ ansible_date_time.iso8601 }}"
 
 httpd_setup_enable: false
-httpd_ssl_certificate_file: 'files/nexus.vm.crt'
-httpd_ssl_certificate_key_file: 'files/nexus.vm.key'
+httpd_ssl_certificate_file: '/etc/ssl/certs/nexus.crt'
+httpd_ssl_certificate_key_file: '/etc/ssl/private/nexus.crt'
 
 ldap_connections:
   # example ldap config :
   - ldap_name: 'LDAP' # used as a key to update the ldap config
     ldap_protocol: 'ldaps' # ldap or ldaps
-    ldap_hostname: 'ipa.nobug.hu'
+    ldap_hostname: 'ipa.cherubits.hu'
     ldap_port: 636
     ldap_auth: 'simple'
     ldap_auth_username: 'admin'
     ldap_auth_password: 'password'
-    ldap_search_base: 'dc=nobug,dc=hu'
-    ldap_user_base_dn: 'uid=admin,cn=users,cn=accounts,dc=nobug,dc=hu'
+    ldap_search_base: 'dc=cherubits,dc=hu'
+    ldap_user_base_dn: 'uid=admin,cn=users,cn=accounts,dc=cherubits,dc=hu'
     ldap_user_filter: '(cn=accounts)'
     ldap_user_object_class: 'inetOrgPerson'
     ldap_user_id_attribute: 'uid'
@@ -82,7 +82,7 @@ nexus_proxy_exclude_hosts:
 nexus_config_pypi: true
 nexus_config_docker: true
 nexus_config_raw: false
-nexus_config_rubygems: false
+nexus_config_rubygems: true
 nexus_config_bower: false
 nexus_config_npm: true
 nexus_config_gitlfs: false
@@ -105,15 +105,15 @@ nexus_roles:
       - all-repos-read
     roles: []
 
-nexus_local_users: []
+nexus_local_users:
 # example user item :
-#  - username: jenkins # used as key to update
-#    first_name: Jenkins
-#    last_name: CI
-#    email: support@company.com
-#    password: "s3cr3t"
-#    roles:
-#      - developers
+  - username: root # used as key to update
+    first_name: Nexus
+    last_name: Superuser
+    email: nexus@cherubits.hu
+    password: "qwe123"
+    roles:
+      - developers
 
 nexus_delete_default_repos: false
 

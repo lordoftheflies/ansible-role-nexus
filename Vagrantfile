@@ -115,7 +115,7 @@
 #     wget http://download.virtualbox.org/virtualbox/5.2.16/VBoxGuestAdditions_5.2.16.iso
 #     then the config.vbguest.iso_path below will work:
 #
-      config.vbguest.iso_path = "#{ENV['HOME']}/resources/sw/ubuntu/16.04/virtualbox/%{version}/VBoxGuestAdditions_%{version}.iso"
+#       config.vbguest.iso_path = "#{ENV['HOME']}/resources/sw/ubuntu/16.04/virtualbox/%{version}/VBoxGuestAdditions_%{version}.iso"
 #      config.vbguest.iso_upload_path = "/tmp"
       config.vm.define box[:name] do |vms|
         vms.vm.box = box[:box]
