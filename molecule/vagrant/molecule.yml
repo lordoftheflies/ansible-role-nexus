@@ -7,6 +7,8 @@ driver:
     name: virtualbox
 lint:
   name: yamllint
+  options:
+    config-file: .ansible-lint
 platforms:
   - name: role_nexus-xenial
     box: cjsteel/xenial

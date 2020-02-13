@@ -38,6 +38,38 @@ ansible-role-nexus is an Ansible role used to...
 * [Virtual Box](https://www.virtualbox.org/)
   * Tested using Version 5.2.14 r123301 (Qt5.6.1) 
 
+Setup LXD:
+
+```shell script
+sudo apt install acl autoconf dnsmasq-base git golang libacl1-dev libcap-dev liblxc1 liblxc-dev libtool libudev-dev libuv1-dev make pkg-config rsync squashfs-tools tar tcl xz-utils ebtables
+sudo apt install curl gettext jq sqlite3 uuid-runtime bzr socat
+sudo apt install lxd lxd-client
+lxd init
+lxc launch ubuntu:18.04 first
+echo "root:1000000:65536" | sudo tee -a /etc/subuid /etc/subgid
+sudo -E LD_LIBRARY_PATH=$LD_LIBRARY_PATH $GOPATH/bin/lxd --group sudo
+```
+
+
+
+Setup Molecule:
+
+```shell script
+virtualenv --python=/usr/bin/python3.7 env
+source ./env/bin/activate
+pip install molecule[lint] molecule[docker] vagrant docker
+```
+
+Setup Vagrant:
+
+```shell script
+vagrant plugin install vagrant-disksize
+vagrant plugin install vai
+vagrant plugin install vagrant-libvirt
+```
+
+
+
 ## Variables
 
 ### defaults/main.yml
