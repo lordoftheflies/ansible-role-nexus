@@ -9,10 +9,14 @@ platforms:
   - name: role_nexus-default-xenial
     source:
       alias: ubuntu/xenial/amd64
-  - name: role_nexus-default-bionic
+  - name: role_nexus-default-eon
     source:
       type: image
-      alias: ubuntu/bionic/amd64
+      alias: ubuntu/eon/amd64
+  - name: role_nexus-default-disco
+    source:
+      type: image
+      alias: ubuntu/disco/amd64
 provisioner:
   name: ansible
   lint:
