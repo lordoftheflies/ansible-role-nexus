@@ -14,6 +14,7 @@ galaxy_info:
       - eon
       - disco
   galaxy_tags:
+    - cherubits
     - nexus
     - repository
     - artifacts
