@@ -1,9 +1,12 @@
 ---
 - name: "Run restoration script"
-  shell: "nexus-blob-restore.sh {{ nexus_restore_point }} 2>&1 | tee -a {{ nexus_restore_log }}"
+  shell: "set -o pipefail | nexus-blob-restore.sh {{ nexus_restore_point }} 2>&1 | tee -a {{ nexus_restore_log }}"
 
 - name: Restart systemd service
-  shell: 'systemctl restart nexus.service'
+  become: true
+  systemd:
+    name: 'nexus.service'
+    state: restarted
 
 - name: Waiting for Nexus service to be ready...
   wait_for:

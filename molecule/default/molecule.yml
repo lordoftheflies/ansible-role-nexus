@@ -5,6 +5,8 @@ driver:
   name: lxd
 lint:
   name: yamllint
+  options:
+    config-file: .ansible-lint
 platforms:
   - name: role_nexus-default-xenial
     source:

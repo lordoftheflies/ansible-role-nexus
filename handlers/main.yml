@@ -1,6 +1,6 @@
 ---
-- name: "Restart sonar"
-  service:
-    name: sonard
+- name: "Restart nexus.service"
+  systemd:
+    name: nexus.service
     state: restarted
-  tags: sonar
+  tags: ['nexus', 'systemd']

@@ -5,10 +5,12 @@ nexus_download_dir: '/tmp'
 nexus_backup_dir: '/var/nexus-backup'
 nexus_os_group: 'nexus'
 nexus_os_user: 'nexus'
-nexus_os_max_filedescriptors: 65536 # nexus > 3.5.x issues a warning on lower value. Next versions might not boot at all
+# nexus > 3.5.x issues a warning on lower value. Next versions might not boot at all
+nexus_os_max_filedescriptors: 65536
 nexus_installation_dir: '/opt'
 nexus_data_dir: '/var/nexus'
-nexus_timezone: 'UTC' # java timezone
+# java timezone
+nexus_timezone: 'UTC'
 nexus_tmp_dir: '/tmp/nexus'
 nexus_script_dir: '{{ nexus_installation_dir }}/nexus-{{ nexus_version }}/etc/scripts'
 nexus_restore_log: '/var/log/nexus-restore.log'
@@ -25,10 +27,11 @@ nexus_default_port: 6000
 nexus_docker_hosted_port: 6001
 nexus_docker_proxy_port: 6003
 nexus_docker_group_port: 6005
-nexus_default_context_path: '/'
-
-nexus_admin_password: 'qwe123' # Note : admin password change subsequent to first-time install is *not implemented* yet
-nexus_install_admin_password: 'admin123' # Note : admin password change subsequent to first-time install is *not implemented* yet
+nexus_context_path: '/'
+# Note : admin password change subsequent to first-time install is *not implemented* yet
+nexus_admin_password: 'qwe123'
+# Note : admin password change subsequent to first-time install is *not implemented* yet
+nexus_install_admin_password: 'admin123'
 nexus_anonymous_access: false
 
 public_hostname: 'nexus.cherubits.hu'
@@ -41,9 +44,11 @@ httpd_ssl_certificate_file: '/etc/ssl/certs/nexus.crt'
 httpd_ssl_certificate_key_file: '/etc/ssl/private/nexus.crt'
 
 ldap_connections:
-  # example ldap config :
-  - ldap_name: 'LDAP' # used as a key to update the ldap config
-    ldap_protocol: 'ldaps' # ldap or ldaps
+  # example ldap config
+  # used as a key to update the ldap config
+  - ldap_name: 'LDAP'
+    # ldap or ldaps
+    ldap_protocol: 'ldaps'
     ldap_hostname: 'ipa.cherubits.hu'
     ldap_port: 636
     ldap_auth: 'simple'
@@ -61,8 +66,6 @@ ldap_connections:
     ldap_group_id_attribute: 'cn'
     ldap_group_member_attribute: 'memberUid'
     ldap_group_member_format: '${dn}'
-
-
 # http proxy
 nexus_with_http_proxy: false
 nexus_http_proxy_host: "proxy.example.com"
@@ -78,7 +81,6 @@ nexus_proxy_exclude_hosts:
   - "localhost"
   - "127.*"
   - "[::1]"
-
 nexus_config_pypi: true
 nexus_config_docker: true
 nexus_config_raw: false
@@ -86,10 +88,10 @@ nexus_config_rubygems: true
 nexus_config_bower: false
 nexus_config_npm: true
 nexus_config_gitlfs: false
-
 # also see _nexus_privilege_defaults below
 nexus_privileges:
-  - name: all-repos-read # used as key to update a privilege
+  # used as key to update a privilege
+  - name: all-repos-read
     description: 'Read & Browse access to all repos'
     repository: '*'
     actions:
@@ -97,7 +99,8 @@ nexus_privileges:
       - browse
 
 nexus_roles:
-  - id: Developpers # can map to a LDAP group id, also used as a key to update a role
+  # can map to a LDAP group id, also used as a key to update a role
+  - id: Developpers
     name: developers
     description: All developers
     privileges:
@@ -106,8 +109,9 @@ nexus_roles:
     roles: []
 
 nexus_local_users:
-# example user item :
-  - username: root # used as key to update
+  # example user item
+  # used as key to update
+  - username: root
     first_name: Nexus
     last_name: Superuser
     email: nexus@cherubits.hu
@@ -173,7 +177,8 @@ nexus_repos_maven_group:
 
 
 nexus_scheduled_tasks:
-  - name: db-backup # Note: CRON must be aligned to nexus-blob-backup.sh cron schedule. -> Task: "Config nexus-backup shell cron"
+  # Note: CRON must be aligned to nexus-blob-backup.sh cron schedule. -> Task: "Config nexus-backup shell cron"
+  - name: db-backup
     cron: '0 0 21 * * ?'
     typeId: db.backup
     taskProperties:
@@ -196,17 +201,23 @@ _nexus_privilege_defaults:
 _nexus_repos_maven_defaults:
   blob_store: "{{ nexus_blob_names.mvn.blob }}"
   strict_content_validation: true
-  version_policy: release # release, snapshot or mixed
-  layout_policy: strict # strict or permissive
-  write_policy: allow_once # allow_once or allow
+  # release, snapshot or mixed
+  version_policy: mixed
+  # strict or permissive
+  layout_policy: strict
+  # allow_once or allow
+  write_policy: allow
 
 # pypi support ...
 _nexus_repos_pypi_defaults:
   blob_store: "{{ nexus_blob_names.pypi.blob }}"
   strict_content_validation: true
-  version_policy: release # release, snapshot or mixed
-  layout_policy: strict # strict or permissive
-  write_policy: allow_once # allow_once or allow
+  # release, snapshot or mixed
+  version_policy: mixed
+  # strict or permissive
+  layout_policy: strict
+  # allow_once or allow
+  write_policy: allow
 
 nexus_repos_pypi_hosted:
   - name: pypi-internal
@@ -228,9 +239,12 @@ nexus_repos_pypi_proxy:
 _nexus_repos_raw_defaults:
   blob_store: "{{ nexus_blob_names.raw.blob }}"
   strict_content_validation: true
-  version_policy: release # release, snapshot or mixed
-  layout_policy: strict # strict or permissive
-  write_policy: allow_once # allow_once or allow
+  # release, snapshot or mixed
+  version_policy: mixed
+  # strict or permissive
+  layout_policy: strict
+  # allow_once or allow
+  write_policy: allow
 
 nexus_repos_raw_proxy:
   - name: ubuntu-archive
@@ -251,19 +265,22 @@ nexus_repos_raw_group:
 _nexus_repos_docker_defaults:
   blob_store: "{{ nexus_blob_names.docker.blob }}"
   strict_content_validation: true
-  version_policy: release # release, snapshot or mixed
-  layout_policy: strict # strict or permissive
-  write_policy: allow_once # allow_once or allow
+  # release, snapshot or mixed
+  version_policy: mixed
+  # strict or permissive
+  layout_policy: strict
+  # allow_once or allow
+  write_policy: allow
 
 nexus_repos_docker_hosted:
   - name: docker-hosted
     http_port: "{{ nexus_docker_hosted_port }}"
-    v1_enabled: True
+    v1_enabled: true
 
 nexus_repos_docker_proxy:
   - name: docker-proxy
     http_port: "{{ nexus_docker_proxy_port }}"
-    v1_enabled: True
+    v1_enabled: true
     index_type: "HUB"
     proxy_url: "https://registry-1.docker.io"
     use_nexus_certificates_to_access_index: false
@@ -271,7 +288,7 @@ nexus_repos_docker_proxy:
 nexus_repos_docker_group:
   - name: docker-group
     http_port: "{{ nexus_docker_group_port }}"
-    v1_enabled: True
+    v1_enabled: true
     member_repos:
       - docker-hosted
       - docker-proxy
@@ -280,7 +297,8 @@ nexus_repos_docker_group:
 _nexus_repos_rubygems_defaults:
   blob_store: "{{ nexus_blob_names.ruby.blob }}"
   strict_content_validation: true
-  write_policy: allow_once # allow_once or allow
+  # allow_once or allow
+  write_policy: allow
 
 nexus_repos_rubygems_hosted:
   - name: rubygems-hosted
@@ -302,7 +320,8 @@ nexus_repos_rubygems_proxy:
 _nexus_repos_bower_defaults:
   blob_store: "{{ nexus_blob_names.bower.blob }}"
   strict_content_validation: true
-  write_policy: allow_once # allow_once or allow
+  # allow_once or allow
+  write_policy: allow_once
 
 nexus_repos_bower_hosted:
   - name: bower-internal
@@ -324,7 +343,8 @@ nexus_repos_bower_proxy:
 _nexus_repos_npm_defaults:
   blob_store: "{{ nexus_blob_names.npm.blob }}"
   strict_content_validation: true
-  write_policy: allow_once # allow_once or allow
+  # allow_once or allow
+  write_policy: allow
 
 nexus_repos_npm_hosted:
   - name: npm-internal
@@ -346,7 +366,8 @@ nexus_repos_npm_proxy:
 _nexus_repos_gitlfs_defaults:
   blob_store: "{{ nexus_blob_names.gitlfs.blob }}"
   strict_content_validation: true
-  write_policy: allow  # allow_once or allow
+  # allow_once or allow
+  write_policy: allow
 
 nexus_repos_gitlfs_hosted:
   - name: gitlfs-internal

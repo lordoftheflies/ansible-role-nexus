@@ -26,4 +26,4 @@ install:
 
 script:
   # Check the role/playbook's syntax.
-  - ansible-playbook tests/travis_test.yml -i tests/travis_inventory --syntax-check
+  - ansible-playbook tests/travis/travis_tests.yml -i tests/travis/travis_inventory --syntax-check

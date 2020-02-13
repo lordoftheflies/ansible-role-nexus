@@ -124,11 +124,11 @@
         vms.vm.guest = box[:distribution]
         vms.vm.hostname = box[:name]
   #      vms.vm.synced_folder ".vagrant/synced", "/home/vagrant"
-        vms.vm.provider "virtualbox" do |vbox|
-          vbox.gui = gui
-          vbox.name = "#{role}-#{box[:name]}"
-          vbox.customize ["modifyvm", :id, "--cpuexecutioncap", box[:cpu]]
-          vbox.customize ["modifyvm", :id, "--memory", box[:ram]]
+        vms.vm.provider "libvirt" do |vbox|
+#           vbox.gui = gui
+#           vbox.name = "#{role}-#{box[:name]}"
+#           vbox.customize ["modifyvm", :id, "--cpuexecutioncap", box[:cpu]]
+#           vbox.customize ["modifyvm", :id, "--memory", box[:ram]]
         end
 
         vms.vm.network :private_network, ip: box[:ip]

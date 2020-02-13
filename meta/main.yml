@@ -1,3 +1,4 @@
+---
 galaxy_info:
   role_name: role_nexus
   author: lordoftheflies
@@ -10,9 +11,9 @@ galaxy_info:
   platforms:
     - name: Ubuntu
       versions:
-      - xenial
-      - eon
-      - disco
+        - xenial
+        - eon
+        - disco
   galaxy_tags:
     - cherubits
     - nexus
