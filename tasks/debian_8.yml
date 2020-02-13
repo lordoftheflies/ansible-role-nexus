@@ -1,5 +1,5 @@
 ---
-# roles/ansible-role-nexus/tasks/debian_8.yml
+# roles/role_nexus/tasks/debian_8.yml
 
 - debug:
     msg:

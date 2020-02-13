@@ -1,5 +1,5 @@
 ---
-# roles/ansible-role-nexus/tasks/ubuntu_12.04.yml
+# roles/role_nexus/tasks/ubuntu_12.04.yml
 
 - debug:
     msg:

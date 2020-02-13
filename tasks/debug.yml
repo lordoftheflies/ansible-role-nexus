@@ -1,5 +1,5 @@
 ---
-# roles/ansible-role-nexus/tasks/debug.yml
+# roles/role_nexus/tasks/debug.yml
 
 # Include /tasks/debug-group-and-host-vars.yml
 

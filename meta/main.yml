@@ -1,16 +1,18 @@
 galaxy_info:
-  role_name: ansible_role_nexus
+  role_name: role_nexus
   author: lordoftheflies
   version: '0.0.1'
   description: Ansible role for Nexus Repository Manager
   company: Cherubits
   license: Apache-2.0
-  issue_tracker_url: https://github.com/lordoftheflies/ansible-role-nexus/issues
+  issue_tracker_url: https://github.com/lordoftheflies/role_nexus/issues
   min_ansible_version: 2.9
   platforms:
     - name: Ubuntu
       versions:
-      - all
+      - xenial
+      - eon
+      - disco
   galaxy_tags:
     - nexus
     - java
@@ -19,4 +21,4 @@ galaxy_info:
     - repository
     - artifacts
 dependencies:
-  - lordoftheflies.ansible_role_java
+  - lordoftheflies.role_java

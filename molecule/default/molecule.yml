@@ -6,10 +6,10 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: ansible-role-nexus-default-xenial
+  - name: role_nexus-default-xenial
     source:
       alias: ubuntu/xenial/amd64
-  - name: ansible-role-nexus-default-bionic
+  - name: role_nexus-default-bionic
     source:
       type: image
       alias: ubuntu/bionic/amd64

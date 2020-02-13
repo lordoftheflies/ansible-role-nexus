@@ -1,5 +1,5 @@
 ---
-# roles/ansible-role-nexus/tasks/centos_7.yml
+# roles/role_nexus/tasks/centos_7.yml
 
 - debug:
     msg:

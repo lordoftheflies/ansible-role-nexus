@@ -1,6 +1,6 @@
---- # ansible-role-nexus/tests/travis_test.yml
+--- # role_nexus/tests/travis_test.yml
 
 - hosts: localhost
   become: true
   roles:
-    - ansible-role-nexus
+    - role_nexus
