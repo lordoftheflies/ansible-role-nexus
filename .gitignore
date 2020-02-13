@@ -1,5 +1,6 @@
 # temp files
 .idea/
+env/
 *~
 .swp
 

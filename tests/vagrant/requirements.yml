@@ -1,3 +1,7 @@
+---
 # Install from galaxy
 #- src: cjsteel.resources
 #- src: singleplatform-eng.users
+roles:
+#  - name: 'lordoftheflies.role_java'
+#    version: '*'

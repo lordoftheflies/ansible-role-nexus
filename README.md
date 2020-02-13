@@ -50,6 +50,14 @@ ansible-role-nexus is an Ansible role used to...
 
 ## Testing
 
+Setup test environment:
+
+```shell script
+virtualenv --python=/usr/bin/python3.7 env
+source ./env/bin/activate
+pip install molecule
+```
+
 To test with all VM's defined in Vagrantfile run the following:
 
 ```shell

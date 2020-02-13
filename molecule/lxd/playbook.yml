@@ -2,8 +2,8 @@
 - name: Converge
   hosts: all
   vars:
-    - ansible-role-nexus_deployment_users_home: /root
-    - ansible-role-nexus_testing_provider: lxd
+    - role_nexus_deployment_users_home: /root
+    - role_nexus_testing_provider: lxd
 
   roles:
     - ansible-role-nexus
