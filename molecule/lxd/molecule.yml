@@ -1,0 +1,27 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: lxd
+lint:
+  name: yamllint
+  options:
+    config-file: .ansible-lint
+platforms:
+  - name: nexus-default-xenial
+    source:
+      alias: ubuntu/xenial/amd64
+  - name: nexus-default-bionic
+    source:
+      type: image
+      alias: ubuntu/bionic/amd64
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: lxd
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

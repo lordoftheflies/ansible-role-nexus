@@ -1,0 +1,30 @@
+---
+# roles/nexus/meta/main.yml
+
+dependencies: []
+galaxy_info:
+  role_name: 'ansible_role_nexus'
+  version: '1.1.0'
+  author: 'lordoftheflies'
+  description: 'Ansible Galaxy role for maintain Nexus.'
+  company: 'Cherubits'
+  license: Apache-2.0
+  min_ansible_version: '2.9'
+  platforms:
+    - name: Ubuntu
+      versions:
+        - xenial
+        - bionic
+    - name: Debian
+      versions:
+        - jessie
+        - stretch
+    - name: Centos
+      versions:
+        - 7
+  galaxy_tags:
+    - cherubits
+    - nexus
+    - debian
+    - ubuntu
+    - centos

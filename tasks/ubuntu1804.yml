@@ -1,0 +1,7 @@
+---
+# roles/nexus/tasks/ubuntu_18.04.yml
+
+- debug:
+    msg:
+      - "Ubuntu 18.04 not supported at this time"
+      - "System {{ inventory_hostname }} not configured"

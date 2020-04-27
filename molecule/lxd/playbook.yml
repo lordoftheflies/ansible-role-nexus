@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    - nexus_deployment_users_home: /root
+    - nexus_testing_provider: lxd
+
+  roles:
+    - nexus

@@ -1,0 +1,17 @@
+*~
+.swp
+*.log
+.private
+.prv
+.retry
+*.retry
+.ansible
+.ansible-galaxy
+.vagrant
+.vault
+generated_inventory
+.env/
+.idea/
+.venv
+*.pyc
+*/__pycache__

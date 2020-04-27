@@ -1,0 +1,26 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: libvirt
+lint:
+  name: yamllint
+  options:
+    config-file: .ansible-lint
+platforms:
+  - name: nexus-xenial
+    box: cjsteel/xenial
+  - name: nexus-bionic
+    box: cjsteel/bionic
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: vagrant
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

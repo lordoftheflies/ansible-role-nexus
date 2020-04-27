@@ -1,0 +1,33 @@
+---
+# roles/nexus/tasks/main.yml
+
+# Boilerplate tasks
+
+
+- name: "Include version-specific variables for OS."
+  include_vars: "{{ specific_variables }}"
+  with_first_found:
+    - files:
+        - "vars/{{ ansible_distribution | lower }}{{ ansible_distribution_version }}.yml"
+        - "vars/{{ ansible_distribution | lower }}{{ ansible_distribution_major_version }}.yml"
+        - "vars/{{ ansible_distribution | lower }}.yml"
+        - "vars/{{ ansible_os_family | lower }}.yml"
+      skip: true
+  loop_control:
+    loop_var: specific_variables
+
+- name: "Include OS specific tasks"
+  include_tasks: "{{ specific_tasks }}"
+  with_first_found:
+    - files:
+        - "tasks/{{ ansible_distribution | lower }}{{ ansible_distribution_version }}.yml"
+        - "tasks/{{ ansible_distribution | lower }}{{ ansible_distribution_major_version }}.yml"
+        - "tasks/{{ ansible_distribution | lower }}.yml"
+        - "tasks/{{ ansible_os_family | lower }}.yml"
+      skip: true
+  loop_control:
+    loop_var: specific_tasks
+
+
+
+# Role tasks

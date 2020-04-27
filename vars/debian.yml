@@ -1,0 +1,5 @@
+---
+# roles/nexus/vars/debian.yml
+
+# Debian specific vars
+nexus_package_extension: 'deb'

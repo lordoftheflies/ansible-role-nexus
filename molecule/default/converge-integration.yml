@@ -1,0 +1,31 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  vars:
+    - ansible_role_nexus_system_user: root
+    - ansible_role_nexus_system_group: adm
+    - ansible_role_nexus_public: true
+    - ansible_role_nexus_secure: true
+    - ansible_role_nexus_endpoint_protocol: https
+    - ansible_role_nexus_endpoint_host: localhost
+    - ansible_role_nexus_endpoint_port: 443
+    - ansible_role_nexus_certificate_public_path: /etc/ssl/cert
+    - ansible_role_nexus_certificate_private_path: /etc/ssl/private
+    - ansible_role_nexus_endpoint_location: /var/www/html
+    - ansible_role_nexus_service: apache2
+
+  pre_tasks:
+    - name: "Update apt cache."
+      apt: update_cache=true cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+      changed_when: false
+
+    - name: "Remove the .dockerenv file so GitLab Omnibus doesn't get confused."
+      file:
+        path: /.dockerenv
+        state: absent
+
+  roles:
+    - role: lordoftheflies.ansible_role_nexus

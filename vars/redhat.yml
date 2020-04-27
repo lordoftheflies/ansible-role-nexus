@@ -1,0 +1,4 @@
+---
+# roles/nexus/vars/debian.yml
+
+nexus_package_extension: 'rpm'
