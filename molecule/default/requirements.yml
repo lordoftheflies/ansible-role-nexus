@@ -1,1 +1,8 @@
 ---
+roles:
+  - name: lordoftheflies.ansible_role_java
+    version: '2.9.2'
+  - name: lordoftheflies.ansible_role_python
+    version: '2.1.8'
+  - name: lordoftheflies.ansible_role_nodejs
+    version: '2.1.8'

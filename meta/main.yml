@@ -1,10 +1,13 @@
 ---
-# roles/nexus/meta/main.yml
 
-dependencies: []
+dependencies:
+  - role: lordoftheflies.ansible_role_java
+  - role: lordoftheflies.ansible_role_python
+  - role: lordoftheflies.ansible_role_nodejs
+
 galaxy_info:
   role_name: 'ansible_role_nexus'
-  version: '1.1.0'
+  version: '2.9.0'
   author: 'lordoftheflies'
   description: 'Ansible Galaxy role for maintain Nexus.'
   company: 'Cherubits'

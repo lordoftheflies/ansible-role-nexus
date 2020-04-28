@@ -1,7 +1,0 @@
----
-# roles/nexus/tasks/centos_7.yml
-
-- debug:
-    msg:
-      - "CentOS 7 not supported at this time"
-      - "System {{ inventory_hostname }} not configured"

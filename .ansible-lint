@@ -1,0 +1,17 @@
+---
+extends: default
+skip_list:
+  - '301'
+ignore: |
+  env
+  build
+  files
+  .github
+  .gitlab
+  .vagrant
+  .ansible-lint
+  .env
+  .venv
+  .ansible
+  .ansible-galaxy
+  _config.yml

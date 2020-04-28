@@ -1,2 +1,6 @@
 ---
-# roles/nexus/handlers/main.yml
+- name: "Restart nexus.service"
+  systemd:
+    name: nexus.service
+    state: restarted
+  tags: ['nexus', 'systemd']
