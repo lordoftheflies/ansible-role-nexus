@@ -15,6 +15,8 @@ Ansible Role for setup Nexus Repository Manager.
 
 ![GitHub Release Date](https://img.shields.io/github/release-date/lordoftheflies/ansible-role-nexus)
 
+[![time tracker](https://wakatime.com/badge/github/lordoftheflies/ansible-role-nexus.svg)](https://wakatime.com/badge/github/lordoftheflies/ansible-role-nexus)
+
 ## Description
 
 Nexus is an Ansible Role used to setup and maintain production grade services.
