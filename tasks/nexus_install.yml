@@ -278,7 +278,7 @@
   become: true
   set_fact:
     current_nexus_admin_password: "{{ nexus_install_admin_password }}"
-  when: nexus_data_dir_contents.stdout|length > 0
+  when: nexus_data_dir_contents.stdout|length == 0
 
 - name: "Subsequent re-provision admin password"
   become: true
