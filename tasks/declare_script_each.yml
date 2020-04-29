@@ -1,5 +1,5 @@
 ---
-- name: "Removing (potential) previously declared Groovy script {{ item }}"
+- name: "Removing (potential) previously declared Groovy script {{ item }} ({{ current_nexus_admin_password }})"
   uri:
     url: "http://localhost:{{ nexus_default_port }}{{ nexus_context_path }}service/rest/v1/script/{{ item }}"
     user: 'admin'
@@ -7,7 +7,13 @@
     method: DELETE
     force_basic_auth: true
     status_code: 204,404
-- name: "Declaring Groovy script {{ item }}"
+    validate_certs: false
+  register: _result
+  #until: _result.status == 200
+  retries: 2 # 2 * 5 seconds = 10 second
+  delay: 5 # Every 5 seconds
+
+- name: "Declaring Groovy script {{ item }} ({{ current_nexus_admin_password }})"
   uri:
     url: "http://localhost:{{ nexus_default_port }}{{ nexus_context_path }}service/rest/v1/script"
     user: 'admin'
@@ -16,7 +22,12 @@
     method: POST
     force_basic_auth: true
     status_code: 204
+    validate_certs: false
     body:
       name: "{{ item }}"
       type: 'groovy'
       content: "{{ lookup('file', 'groovy/' + item + '.groovy') }}"
+  register: _result
+  #until: _result.status == 200
+  retries: 2 # 2 * 5 seconds = 10 second
+  delay: 5 # Every 5 seconds

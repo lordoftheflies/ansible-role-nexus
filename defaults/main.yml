@@ -29,7 +29,7 @@ nexus_docker_proxy_port: 6003
 nexus_docker_group_port: 6005
 nexus_context_path: '/'
 # Note : admin password change subsequent to first-time install is *not implemented* yet
-nexus_admin_password: 'qwe123'
+nexus_admin_password: 'admin123'
 # Note : admin password change subsequent to first-time install is *not implemented* yet
 nexus_install_admin_password: 'admin123'
 nexus_anonymous_access: false
@@ -111,13 +111,13 @@ nexus_roles:
 nexus_local_users:
   # example user item
   # used as key to update
-  - username: root
-    first_name: Nexus
-    last_name: Superuser
-    email: nexus@cherubits.hu
-    password: "qwe123"
-    roles:
-      - developers
+  #- username: root
+  #  first_name: Nexus
+  #  last_name: Superuser
+  #  email: nexus@cherubits.hu
+  #  password: "qwe123"
+  #  roles:
+  #    - developers
 
 nexus_delete_default_repos: false
 

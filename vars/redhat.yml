@@ -1,4 +1,4 @@
 ---
 # roles/nexus_role/vars/debian.yml
 
-ansible-role-nexus_package_extension: 'rpm'
+ansible_role_nexus_package_extension: 'rpm'
