@@ -19,3 +19,4 @@ provisioner:
   name: ansible
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+    idempotence: ${MOLECULE_PLAYBOOK_IDEMPOTENCE:-idempotence.yml}

@@ -94,7 +94,7 @@
       - "{{ nexus_installation_dir }}/nexus-latest/etc/scripts"
   when: nexus_version >= '3.1.0'
 
-- name: Allow nexus to create first-time install configuration files in  {{ nexus_installation_dir }}/nexus-latest/etc
+- name: "Allow nexus to create first-time install configuration files in  {{ nexus_installation_dir }}/nexus-latest/etc"
   become: true
   file:
     path: "{{ item }}"
@@ -226,12 +226,20 @@
   command: "ls {{ nexus_data_dir }}"
   register: nexus_data_dir_contents
 
-- name: Clean cache for upgrade process
+- name: "Clean cache for upgrade process"
   become: true
   file:
     path: "{{ nexus_data_dir }}/clean_cache"
     state: touch
   when: nexus_latest_version is changed and nexus_data_dir_contents.stdout| length > 0
+
+- name: "Allow scripting"
+  become: true
+  lineinfile:
+    dest: "{{ nexus_default_settings_file }}"
+    regexp: '^nexus.scripts.allowCreation.*'
+    line: "nexus.scripts.allowCreation=true"
+    state: present
 
 - name: "Restart systemd service"
   become: true
@@ -241,20 +249,20 @@
     daemon_reload: true
     enabled: true
 
-- name: Waiting for Nexus service to be ready...
+- name: "Waiting for Nexus service to be ready..."
   become: true
   wait_for:
     path: "{{ nexus_data_dir }}/log/nexus.log"
     search_regex: "Started Sonatype Nexus OSS .*"
     timeout: 1800
 
-- name: Waiting for nexus to be ready...
+- name: "Waiting for nexus to be ready..."
   become: true
   wait_for:
     port: "{{ nexus_default_port }}"
     delay: 5
 
-- name: Chown configuration files from {{ nexus_installation_dir }}/nexus-latest/etc back to root
+- name: "Chown configuration files from {{ nexus_installation_dir }}/nexus-latest/etc back to root"
   become: true
   file:
     path: "{{ nexus_installation_dir }}/nexus-latest/etc"
@@ -263,36 +271,49 @@
     mode: "0644"
     recurse: true
 
-- name: Prevent nexus to create any new configuration files in  {{ nexus_installation_dir }}/nexus-latest/etc
+- name: "Prevent nexus to create any new configuration files in  {{ nexus_installation_dir }}/nexus-latest/etc"
   become: true
   file:
-    path: "{{ item }}"
+    path: "{{ settings_dir_item }}"
     state: "directory"
     owner: "root"
     group: "root"
     mode: "0755"
     recurse: false
   with_items: "{{ nexus_app_dir_settings_dirs }}"
+  loop_control:
+    loop_var: settings_dir_item
 
 - name: "First-time install admin password: {{ nexus_install_admin_password }}"
   become: true
   set_fact:
     current_nexus_admin_password: "{{ nexus_install_admin_password }}"
-  when: nexus_data_dir_contents.stdout|length == 0
+  when: nexus_data_dir_contents.stdout | length > 0
 
 - name: "Subsequent re-provision admin password"
   become: true
   set_fact:
     current_nexus_admin_password: "{{ nexus_admin_password }}"
-  when: nexus_data_dir_contents.stdout|length > 0
+  when: nexus_data_dir_contents.stdout | length > 0
 #  false_log: true
+
+- name: "Check admin password"
+  become: true
+  command: "cat /var/nexus/admin.password"
+  register: admin_password
+
+- name: "Set admin password"
+  become: true
+  when: current_nexus_admin_password is not defined
+  set_fact:
+    current_nexus_admin_password: "{{ admin_password.stdout }}"
 
 - include: declare_script_each.yml
   become: true
   with_items:
     - update_admin_password
     - setup_ldap
-    - setup_afalsenymous_access
+    - setup_anonymous_access
     - setup_base_url
     - setup_capability
     - setup_http_proxy

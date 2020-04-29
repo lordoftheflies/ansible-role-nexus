@@ -1,5 +1,5 @@
 ---
-nexus_version: '3.21.1-01'
+nexus_version: '3.22.1-02'
 nexus_package: "nexus-{{ nexus_version }}-unix.tar.gz"
 nexus_download_dir: '/tmp'
 nexus_backup_dir: '/var/nexus-backup'
@@ -34,7 +34,7 @@ nexus_admin_password: 'admin123'
 nexus_install_admin_password: 'admin123'
 nexus_anonymous_access: false
 
-public_hostname: 'nexus.cherubits.hu'
+public_hostname: 'nexus.vm'
 
 nexus_branding_header: ""
 nexus_branding_footer: "Last provisionned {{ ansible_date_time.iso8601 }}"
@@ -53,7 +53,7 @@ ldap_connections:
     ldap_port: 636
     ldap_auth: 'simple'
     ldap_auth_username: 'admin'
-    ldap_auth_password: 'password'
+    ldap_auth_password: 'admin123'
     ldap_search_base: 'dc=cherubits,dc=hu'
     ldap_user_base_dn: 'uid=admin,cn=users,cn=accounts,dc=cherubits,dc=hu'
     ldap_user_filter: '(cn=accounts)'
@@ -108,7 +108,7 @@ nexus_roles:
       - all-repos-read
     roles: []
 
-nexus_local_users:
+nexus_local_users: []
   # example user item
   # used as key to update
   #- username: root

@@ -10,7 +10,9 @@ parsed_args = new JsonSlurper().parseText(args)
 
 def ldapConfigMgr = container.lookup(LdapConfigurationManager.class.getName());
 
-def ldapConfig = new LdapConfiguration()
+def ldapConfig = ldapConfigMgr.newConfiguration()
+ldapConfig.setName(parsed_args.name)
+
 boolean update = false;
 
 // Look for existing config to update

@@ -3,7 +3,26 @@ import org.sonatype.nexus.repository.config.Configuration
 
 parsed_args = new JsonSlurper().parseText(args)
 
-configuration = new Configuration(
+repositoryManager = repository.repositoryManager
+
+private Configuration newConfiguration(Map map) {
+    Configuration config
+    try {
+        config = repositoryManager.newConfiguration()
+    } catch (MissingMethodException) {
+        // Compatibility with nexus versions older than 3.21
+        config = Configuration.newInstance()
+    }
+    config.with {
+        repositoryName = map.repositoryName
+        recipeName = map.recipeName
+        online = map.online
+        attributes = map.attributes as Map
+    }
+    return config
+}
+
+configuration = newConfiguration(
         repositoryName: parsed_args.name,
         recipeName: 'raw-group',
         online: true,

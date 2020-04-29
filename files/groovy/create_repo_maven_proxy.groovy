@@ -1,5 +1,6 @@
 import groovy.json.JsonSlurper
 import org.sonatype.nexus.repository.config.Configuration
+import org.sonatype.nexus.repository.manager.RepositoryManager;
 
 parsed_args = new JsonSlurper().parseText(args)
 
@@ -9,7 +10,33 @@ authentication = parsed_args.remote_username == null ? null : [
         password: parsed_args.remote_password
 ]
 
-configuration = new Configuration(
+repositoryManager = repository.repositoryManager
+
+private Configuration newConfiguration(Map map) {
+    Configuration config
+    try {
+        config = repositoryManager.newConfiguration()
+    } catch (MissingMethodException) {
+        // Compatibility with nexus versions older than 3.21
+        config = Configuration.newInstance()
+    }
+    config.with {
+        repositoryName = map.repositoryName
+        recipeName = map.recipeName
+        online = map.online
+        attributes = map.attributes as Map
+    }
+    return config
+}
+
+private boolean configurationChanged(Configuration oldConfig, Configuration newConfig) {
+    if (oldConfig.attributes.httpclient)
+        if (oldConfig.attributes.httpclient.authentication == [:])
+            oldConfig.attributes.httpclient.authentication = null
+    return oldConfig.properties == newConfig.properties
+}
+
+configuration = newConfiguration(
         repositoryName: parsed_args.name,
         recipeName: 'maven2-proxy',
         online: true,
