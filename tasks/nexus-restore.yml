@@ -7,14 +7,17 @@
   systemd:
     name: 'nexus.service'
     state: restarted
+  when: ansible_service_mgr == 'systemd'
 
 - name: Waiting for Nexus service to be ready...
+  become: true
   wait_for:
     path: "{{ nexus_data_dir }}/log/nexus.log"
     search_regex: "Started Sonatype Nexus OSS .*"
     timeout: 1800
 
 - name: Waiting for nexus to be ready...
+  become: true
   wait_for:
     port: "{{ nexus_default_port }}"
     delay: 5

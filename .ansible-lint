@@ -2,6 +2,7 @@
 extends: default
 skip_list:
   - '301'
+  - '503'
 ignore: |
   env
   build

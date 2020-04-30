@@ -17,6 +17,7 @@ platforms:
     pre_build_image: true
 provisioner:
   name: ansible
+  log: true
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
-    idempotence: ${MOLECULE_PLAYBOOK_IDEMPOTENCE:-idempotence.yml}
+#    prepare: ${MOLECULE_PREPARE_PLAYBOOK:-prepare.yml}
